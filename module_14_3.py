@@ -6,7 +6,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import asyncio
 
-api = ''
+api = '8000769412:AAHrlLNLslcP0A3EeaGDD9bK7dXMvzukG_w'
 bot = Bot(token=api)
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
@@ -29,10 +29,10 @@ kb_start = InlineKeyboardMarkup(
 
 kb_product = InlineKeyboardMarkup(
     inline_keyboard=[
-        [InlineKeyboardButton(text='Продукт №1 ', callback_data='product_buying')],
-        [InlineKeyboardButton(text='Продукт №2 ', callback_data='product_buying')],
-        [InlineKeyboardButton(text='Продукт №3 ', callback_data='product_buying')],
-        [InlineKeyboardButton(text='Продукт №4 ', callback_data='product_buying')]
+        [InlineKeyboardButton(text='Продукт №1 ', callback_data='product_buying'),
+         InlineKeyboardButton(text='Продукт №2 ', callback_data='product_buying')],
+        [InlineKeyboardButton(text='Продукт №3 ', callback_data='product_buying'),
+         InlineKeyboardButton(text='Продукт №4 ', callback_data='product_buying')]
     ], resize_keyboard=True
 )
 
@@ -66,16 +66,19 @@ async def set_gender(message):
 @dp.callback_query_handler(text='buy')
 async def get_buying_list(call):
     with open('files/5.jpg', 'rb') as img:
-        await call.message.answer('Название: Продукт {img} | Описание: описание {img} | Цена: {img}')
+        await call.message.answer('Название: Продукт "Капибарка" | Описание: милашка | Цена: 100 обнимашек')
         await call.message.answer_photo(img)
     with open('files/4.png', 'rb') as img:
-        await call.message.answer('Название: Продукт {img} | Описание: описание {img} | Цена: {img}')
+        await call.message.answer('Название: Продукт "Две капибарки" | Описание: милота в квадрате'
+                                  '| Цена: 200 поцелуйчиков')
         await call.message.answer_photo(img)
     with open('files/2.jpg', 'rb') as img:
-        await call.message.answer('Название: Продукт {img} | Описание: описание {img} | Цена: {img}')
+        await call.message.answer('Название: Продукт "Тазик капибарок" | Описание: Донт Вори, би каппи '
+                                  '| Цена: 300 комплементов')
         await call.message.answer_photo(img)
     with open('files/3.png', 'rb') as img:
-        await call.message.answer('Название: Продукт {img} | Описание: описание {img} | Цена: {img}')
+        await call.message.answer('Название: Продукт "Много капибарок не бывает" '
+                                  '| Описание: Сама не знаю что с этим делать | Цена: 400 лучиков любви')
         await call.message.answer_photo(img)
     await call.message.answer('Выберете продукт для покупки: ', reply_markup=kb_product)
     await call.answer()
