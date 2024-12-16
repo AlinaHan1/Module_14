@@ -32,9 +32,10 @@ def get_all_products():
     cursor = connection.cursor()
 
     cursor.execute('SELECT * FROM Products WHERE id > ?', (0,))
+    all_products = cursor.fetchall()
     connection.commit()
     connection.close()
-    return cursor.fetchall()
+    return all_products
 
 def add_user(username, email, age):
     connection = sqlite3.connect('products.db')
